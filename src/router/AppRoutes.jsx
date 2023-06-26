@@ -1,15 +1,17 @@
 import { createBrowserRouter, Route, Routes } from 'react-router-dom';
-import Analytics from '../containers/Analytics/Analytics';
-import Content from '../containers/Content';
-import Customization from '../containers/Customization';
+import AddStudent from '../containers/AddStudent';
+import Registration from '../containers/Registration';
 import Dashboard from '../containers/Dashboard';
+import CreateClasses from '../containers/CreateClasses';
+import RemoveStudent from '../containers/RemoveStudent';
 
 const AppRoutes = () => {
     return <Routes>
         <Route path='/' element={<Dashboard />} />
-        <Route path='/content' element={<Content />} />
-        <Route path='/analytics' element={<Analytics />} />
-        <Route path='/customization' element={<Customization />} />
+        <Route path='/addstudent' element={<AddStudent />} />
+        <Route path='/removestudent' element={<RemoveStudent />} />
+        <Route path='/registration' element={<Registration />} />
+        <Route path='/createclasses' element={<CreateClasses />} />
     </Routes>
 };
 
