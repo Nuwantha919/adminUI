@@ -31,10 +31,10 @@ function SideNav() {
                 },
             }}>
             <MenuItem active={window.location.pathname === "/"} component={<Link to="/" />} icon={<HomeOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
-            <MenuItem active={window.location.pathname === "/content"} component={<Link to="/content" />} icon={<GroupAddOutlinedIcon />}> <Typography variant="body2">Add Student </Typography></MenuItem>
-            <MenuItem active={window.location.pathname === "/analytics"} component={<Link to="/analytics" />} icon={<DeleteOutlineOutlinedIcon />}> <Typography variant="body2">Remove Student </Typography></MenuItem>
-            <MenuItem active={window.location.pathname === "/customization"} component={<Link to="/customization" />} icon={<HowToRegOutlinedIcon />}> <Typography variant="body2">Show registration </Typography></MenuItem >
-            <MenuItem active={window.location.pathname === "/analytics"} component={<Link to="/analytics" />} icon={<NoteAddOutlinedIcon />}> <Typography variant="body2">Create Classes </Typography></MenuItem>
+            <MenuItem active={window.location.pathname === "/addstudent"} component={<Link to="/addstudent" />} icon={<GroupAddOutlinedIcon />}> <Typography variant="body2">Add Student </Typography></MenuItem>
+            <MenuItem active={window.location.pathname === "/removestudent"} component={<Link to="/removestudent" />} icon={<DeleteOutlineOutlinedIcon />}> <Typography variant="body2">Remove Student </Typography></MenuItem>
+            <MenuItem active={window.location.pathname === "/registration"} component={<Link to="/registration" />} icon={<HowToRegOutlinedIcon />}> <Typography variant="body2">Show registration </Typography></MenuItem >
+            <MenuItem active={window.location.pathname === "/createclasses"} component={<Link to="/createclasses" />} icon={<NoteAddOutlinedIcon />}> <Typography variant="body2">Create Classes </Typography></MenuItem >
 
         </Menu >
     </Sidebar >; 
