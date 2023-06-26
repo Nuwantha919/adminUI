@@ -40,7 +40,7 @@ theme = createTheme(theme, {
             display: 'block',
             fontWeight: 500
         },
-        h6: {
+        h6: { 
             fontSize: '1rem',
         },
         h7: {

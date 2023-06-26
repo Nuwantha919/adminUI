@@ -4,6 +4,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined';
 import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined'; import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'; import StyleIcon from '@mui/icons-material/Style';
 import { Link, useNavigate } from "react-router-dom";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'; import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined'; import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'; import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined'; import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 
 function SideNav() {
     const { collapsed } = useProSidebar();
@@ -17,8 +18,8 @@ function SideNav() {
     >
         <Box sx={styles.avatarContainer}>
             <Avatar sx={styles.avatar} alt="Masoud" src="src/assets/avatars/masoud.jpeg" />
-            {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>Your Channel</Typography> : null}
-            {!collapsed ? <Typography variant="overline">React with Masoud</Typography> : null}
+            {!collapsed ? <Typography variant="body2" sx={styles.yourChannel}>Adminstrator</Typography> : null}
+            {!collapsed ? <Typography variant="overline">Wimalasiri P.M.A.C</Typography> : null}
         </Box>
 
         <Menu
@@ -29,12 +30,14 @@ function SideNav() {
                     };
                 },
             }}>
-            <MenuItem active={window.location.pathname === "/"} component={<Link to="/" />} icon={<DashboardOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
-            <MenuItem active={window.location.pathname === "/content"} component={<Link to="/content" />} icon={<SourceOutlinedIcon />}> <Typography variant="body2">Content </Typography></MenuItem>
-            <MenuItem active={window.location.pathname === "/analytics"} component={<Link to="/analytics" />} icon={<AnalyticsOutlinedIcon />}> <Typography variant="body2">Analytics </Typography></MenuItem>
-            <MenuItem active={window.location.pathname === "/customization"} component={<Link to="/customization" />} icon={<StyleOutlinedIcon />}> <Typography variant="body2">Customization </Typography></MenuItem >
+            <MenuItem active={window.location.pathname === "/"} component={<Link to="/" />} icon={<HomeOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
+            <MenuItem active={window.location.pathname === "/content"} component={<Link to="/content" />} icon={<GroupAddOutlinedIcon />}> <Typography variant="body2">Add Student </Typography></MenuItem>
+            <MenuItem active={window.location.pathname === "/analytics"} component={<Link to="/analytics" />} icon={<DeleteOutlineOutlinedIcon />}> <Typography variant="body2">Remove Student </Typography></MenuItem>
+            <MenuItem active={window.location.pathname === "/customization"} component={<Link to="/customization" />} icon={<HowToRegOutlinedIcon />}> <Typography variant="body2">Show registration </Typography></MenuItem >
+            <MenuItem active={window.location.pathname === "/analytics"} component={<Link to="/analytics" />} icon={<NoteAddOutlinedIcon />}> <Typography variant="body2">Create Classes </Typography></MenuItem>
+
         </Menu >
-    </Sidebar >;
+    </Sidebar >; 
 }
 
 export default SideNav;

@@ -20,7 +20,7 @@ function App() {
     <React.Fragment>
       <ThemeProvider theme={theme}>
         <ProSidebarProvider>
-          <CssBaseline />
+          <CssBaseline />                 {/*to add css basic rules */}
 
           <AppHeader />
           <Box sx={styles.container}>
