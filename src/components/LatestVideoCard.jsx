@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 function LatestVideoCard(props) {
     return (<Card {...props}>
         <CardContent>
-            <Typography variant="cardTitle">Latest Video Performance</Typography>
+            <Typography variant="cardTitle">Total School Attendance</Typography>
             <Box sx={styles.latestVideoContainer} >
                 <Box sx={styles.latestVideoThumbnail} component={'img'} src={'src/assets/thumbnail.png'} />
                 <Typography sx={styles.latestVideoTitle}>ReactJs SearchBar in 5 Minutes!</Typography>

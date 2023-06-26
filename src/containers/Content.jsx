@@ -1,201 +1,127 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import { useState } from "react";
-import { DataGrid } from '@mui/x-data-grid';
-import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
-import TabPanel from "../components/TabPanel";
-const columns = [
-    {
-        field: 'thumbnail',
-        headerName: 'Video',
-        minWidth: 500,
-        flex: 4,
-        renderCell: (params) => <Box sx={styles.videoColumn}>
-            <Box
-                component="img"
-                sx={styles.videoThumbnail}
-                src={params.row.thumbnail}
-            />
-            <Box sx={styles.videoDetails}>
-                <Typography sx={styles.videoTitle}>Must Know JavaScript Interview Questions | Part 1</Typography>
-                <Typography sx={styles.videoDescription}>In this video you will learn how to solve JavaScript interview questions.</Typography>
-            </Box>
-        </Box>,
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import {Container, Paper, Button} from "@mui/material";
+import {useEffect, useState} from "react";
 
-    },
+export default function Student() {
+    const paperStyle = {padding:'50px 20px',width:"500",margin:"20px auto"};
+    const [name, setname] = useState('');
+    const [address, setaddress] = useState('');
+    const [landphone, setlandphone] = useState('');
+    const [weight, setweight] = useState('');
+    const [height, setheight] = useState('');
+    const [students, setStudents] = useState([]);
+    const [id, setid] = useState('');
 
-    {
-        field: 'visibility',
-        headerName: 'Visibility',
-        minWidth: 170,
-        flex: 2,
-        renderCell: (params) => <Box sx={styles.iconColumn} >
-            <VisibilityOutlinedIcon />
-            <Typography sx={styles.iconColumnText}>{params.row.visibility}</Typography>
-        </Box>,
+    const regStudent = (e)=>{
+        e.preventDefault()
+        const student = {name, address, landphone, weight, height}
+        console.log(student)
+        fetch("http://localhost:8080/student/addNew",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(student)
+        }).then(()=>{
+            console.log("New Student added")
+        })
     }
-    ,
 
-    {
-        field: 'monetization',
-        headerName: 'Monetization',
-        minWidth: 170,
-        flex: 2,
-        renderCell: (params) => <Box sx={styles.iconColumn} >
-            <AttachMoneyOutlinedIcon />
-            <Typography sx={styles.iconColumnText}>{params.row.monetization}</Typography>
-        </Box>,
-    },
-    {
-        field: 'views',
-        headerName: 'Views',
-        minWidth: 170,
-        flex: 1,
-    },
-    {
-        field: 'comments',
-        headerName: 'Comments',
-        minWidth: 170,
-        flex: 1,
-    }
-];
+    const delStudent = (e) => {
+        e.preventDefault();
 
-const videos = [
-    { id: 1, thumbnail: 'src/assets/thumbnail.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
-    { id: 2, thumbnail: 'src/assets/thumbnail2.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
+        const studentId = {id}
 
-];
-
-const posts = [
-    { id: 1, thumbnail: 'src/assets/thumbnail2.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
-    { id: 2, thumbnail: 'src/assets/thumbnail2.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
-    { id: 3, thumbnail: 'src/assets/thumbnail.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
-
-];
-
-const playlists = [
-    { id: 1, thumbnail: 'src/assets/thumbnail.png', visibility: 'Public', monetization: 'On', views: 100, comments: 12 },
-];
-
-const lives = [
-];
-
-
-function Content() {
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+        fetch(`http://localhost:8080/students/${studentId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(() => {
+                console.log("Student deleted");
+            })
+            .catch((error) => {
+                console.error("Error deleting student:", error);
+            });
     };
-    return <Box>
-        <Typography sx={styles.pageTitle} variant="h5">Content</Typography>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Videos" id='tab-0' />
-                <Tab label="Live" id='tab-1' />
-                <Tab label="Posts" id='tab-2' />
-                <Tab label="Playlists" id='tab-3' />
-            </Tabs>
+
+
+    useEffect(()=>{
+        fetch("http://localhost:8080/student/getAll")
+            .then(res=>res.json())
+            .then((result)=>{
+                    setStudents(result);
+                }
+            )
+    },[])
+
+    return (
+        <Container>
+            <Paper elevation={3} style={paperStyle}>
+                <h1>Register a Student</h1>
+        <Box
+            component="form"
+            sx={{
+                '& > :not(style)': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <TextField id="outlined-basic" label="Student Name" variant="outlined" fullWidth={true}
+                       value={name} onChange={(e)=>setname(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Student Address" variant="outlined" fullWidth={true}
+                       value={address} onChange={(e)=>setaddress(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Land Phone" variant="outlined" fullWidth={true}
+                       value={landphone} onChange={(e)=>setlandphone(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Weight" variant="outlined" fullWidth={true}
+                       value={weight} onChange={(e)=>setweight(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Height" variant="outlined" fullWidth={true}
+                       value={height} onChange={(e)=>setheight(e.target.value)}
+            />
         </Box>
-        <TabPanel value={value} index={0}>
+                <Button variant="contained" onClick = {regStudent}>
+                    Submit
+                </Button>
+            </Paper>
 
-            <DataGrid
-                rows={videos}
-                columns={columns}
-                pageSize={25}
-                rowsPerPageOptions={[25]}
-                checkboxSelection
-                autoHeight
-                rowHeight={70}
-            />
+            <Paper elevation={3} style={paperStyle}>
+                <h1>Delete a Student</h1>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField id="outlined-basic" label="Student ID" variant="outlined" fullWidth={true}
+                               value={id} onChange={(e)=>setid(e.target.value)}
+                    />
+                </Box>
+                <Button variant="outlined" id="studentId" color="error" onClick={(e) => delStudent(e)}>
+                    Delete
+                </Button>
+            </Paper>
 
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-            <DataGrid
-                rows={lives}
-                columns={columns}
-                pageSize={25}
-                rowsPerPageOptions={[25]}
-                checkboxSelection
-                autoHeight
-                rowHeight={70}
-            />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-            <DataGrid
-                rows={posts}
-                columns={columns}
-                pageSize={25}
-                rowsPerPageOptions={[25]}
-                checkboxSelection
-                autoHeight
-                rowHeight={70}
-            />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-            <DataGrid
-                rows={playlists}
-                columns={columns}
-                pageSize={25}
-                rowsPerPageOptions={[25]}
-                checkboxSelection
-                autoHeight
-                rowHeight={70}
-            />
-        </TabPanel>
+            <h1>Students</h1>
 
+            <Paper elevation={3} style={paperStyle}>
 
-    </Box>;
+                {students.map(student=>(
+                    <Paper elevation={6} style={{margin:"10px",padding:"15px", textAlign:"left"}} key={student.id}>
+                        Id:{student.id}<br/>
+                        Name:{student.name}<br/>
+                        Address:{student.address}<br/>
+                        LandPhone:{student.landphone}<br/>
+                        Weight: {student.weight}<br/>
+                        Height: {student.height}
+                    </Paper>
+                ))
+                }
+            </Paper>
+        </Container>
+    );
 }
-
-export default Content;
-
-/**
- * @type {import("@mui/material").SxProps}
- */
-
-const styles = {
-    pageTitle: {
-        mb: 2
-    },
-    videoThumbnail: {
-        width: 120,
-    },
-    videoTitle: {
-        fontSize: '0.8rem',
-        width: 490,
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        '&:hover': {
-            textDecoration: 'underline',
-            cursor: 'pointer'
-        }
-    },
-    videoDescription: {
-        fontSize: '0.7rem',
-        color: 'neutral.normal',
-        width: 490,
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden'
-    },
-    videoDetails: {
-        ml: 2
-    },
-    videoColumn: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    iconColumn: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    iconColumnText: {
-        ml: 1,
-        fontSize: '0.9rem'
-    }
-
-}
-
