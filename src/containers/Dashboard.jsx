@@ -4,7 +4,7 @@ import LatestVideoCard from "../components/LatestVideoCard";
 
 function Dashboard() {
     return <Box>
-        <Typography sx={styles.pageTitle} variant="h5">Channel Dashboard</Typography>
+        <Typography sx={styles.pageTitle} variant="h5">School Management System</Typography>
         <Box sx={styles.columnsContainer}>
 
             <LatestVideoCard sx={styles.item} />

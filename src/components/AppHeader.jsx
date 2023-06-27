@@ -5,6 +5,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useProSidebar } from "react-pro-sidebar";
+import { Height } from "@mui/icons-material";
 
 function AppHeader() {
 

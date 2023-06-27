@@ -7,17 +7,30 @@ import {useEffect, useState} from "react";
 
 export default function Student() {
     const paperStyle = {padding:'50px 20px',width:"500",margin:"20px auto"};
-    const [name, setname] = useState('');
+    const [sname, setsname] = useState('');
     const [address, setaddress] = useState('');
-    const [landphone, setlandphone] = useState('');
+    const [email, setemail] = useState('');
+    const [fname, setfname] = useState('');
+    const [f_mobile, setf_mobile] = useState('');
+    const [f_occupation, setf_occupation] = useState('');
+    const [fartheremail, setfartheremail] = useState('');
+    const [mname, setmname] = useState('');
+    const [m_mobile, setm_mobile] = useState('');
+    const [m_occupation, setm_occupation] = useState('');
+    const [gname, setgname] = useState('');
+    const [g_mobile, setg_mobile] = useState('');
+    const [g_occupation, setg_occupation] = useState('');
+    const [guardianemail, setguardianemail] = useState('');
+    const [l_phone, setl_phone] = useState('');
     const [weight, setweight] = useState('');
     const [height, setheight] = useState('');
+    const [image, setimage] = useState('');
     const [students, setStudents] = useState([]);
     const [id, setid] = useState('');
 
     const regStudent = (e)=>{
         e.preventDefault()
-        const student = {name, address, landphone, weight, height}
+        const student = {sname,address,email, fname, f_mobile, f_occupation, fartheremail, mname, m_mobile, m_occupation, gname, g_mobile, g_occupation, guardianemail, l_phone, weight, height, image}
         console.log(student)
         fetch("http://localhost:8080/student/addNew",{
             method:"POST",
@@ -58,7 +71,15 @@ export default function Student() {
     return (
         <Container>
             <Paper elevation={3} style={paperStyle}>
-                <h1>Register a Student</h1>
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    height={50} // Set the desired height
+                    >
+                    <h1>Register a Student</h1>
+
+                 </Box>
         <Box
             component="form"
             sx={{
@@ -67,28 +88,83 @@ export default function Student() {
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" label="Student Name" variant="outlined" fullWidth={true}
-                       value={name} onChange={(e)=>setname(e.target.value)}
+
+            <h2>Student's details</h2>
+            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true}
+                       value={sname} onChange={(e)=>setsname(e.target.value)}
             />
-            <TextField id="outlined-basic" label="Student Address" variant="outlined" fullWidth={true}
+            <TextField id="outlined-basic" label="Address" variant="outlined" fullWidth={true}
                        value={address} onChange={(e)=>setaddress(e.target.value)}
             />
-            <TextField id="outlined-basic" label="Land Phone" variant="outlined" fullWidth={true}
-                       value={landphone} onChange={(e)=>setlandphone(e.target.value)}
+            <TextField id="outlined-basic" label="Land phone number" variant="outlined" fullWidth={true}
+                       value={l_phone} onChange={(e)=>setl_phone(e.target.value)}
             />
+            <TextField id="outlined-basic" label="email address" variant="outlined" fullWidth={true}
+                       value={email} onChange={(e)=>setemail(e.target.value)}
+            />            
             <TextField id="outlined-basic" label="Weight" variant="outlined" fullWidth={true}
                        value={weight} onChange={(e)=>setweight(e.target.value)}
             />
-            <TextField id="outlined-basic" label="Height" variant="outlined" fullWidth={true}
+                <TextField id="outlined-basic" label="Height" variant="outlined" fullWidth={true}
                        value={height} onChange={(e)=>setheight(e.target.value)}
             />
+            <TextField id="outlined-basic" label="IMAGE" variant="outlined" fullWidth={true}
+                       value={image} onChange={(e)=>setimage(e.target.value)}
+            />
+                <h2>Father's details</h2>
+            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true}
+                       value={fname} onChange={(e)=>setfname(e.target.value)}
+                       />
+            <TextField id="outlined-basic" label="Mobile number" variant="outlined" fullWidth={true}
+                       value={f_mobile} onChange={(e)=>setf_mobile(e.target.value)}
+                       />
+            <TextField id="outlined-basic" label="Occupation" variant="outlined" fullWidth={true}
+                       value={f_occupation} onChange={(e)=>setf_occupation(e.target.value)}
+                       />
+                        <TextField id="outlined-basic" label="email address" variant="outlined" fullWidth={true}
+                       value={fartheremail} onChange={(e)=>setfartheremail(e.target.value)}
+                       />
+            <h2>Mother's details</h2>
+            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true}
+                       value={mname} onChange={(e)=>setmname(e.target.value)}
+                       />
+            <TextField id="outlined-basic" label="Mobile number" variant="outlined" fullWidth={true}
+                       value={m_mobile} onChange={(e)=>setm_mobile(e.target.value)}
+                       />
+            <TextField id="outlined-basic" label="Occupation" variant="outlined" fullWidth={true}
+                       value={m_occupation} onChange={(e)=>setm_occupation(e.target.value)}
+                       />
+            <h2>Guardian's details</h2>
+            <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth={true}
+                       value={gname} onChange={(e)=>setgname(e.target.value)}
+            />
+             <TextField id="outlined-basic" label="Mobile number" variant="outlined" fullWidth={true}
+                       value={g_mobile} onChange={(e)=>setweight(e.target.value)}
+            />
+            <TextField id="outlined-basic" label="Occupation" variant="outlined" fullWidth={true}
+                       value={g_occupation} onChange={(e)=>setg_mobile(e.target.value)}
+            />
+                        <TextField id="outlined-basic" label="email address" variant="outlined" fullWidth={true}
+                       value={guardianemail} onChange={(e)=>setguardianemail(e.target.value)}
+            />
+        <br />
+        <br />
+            <Box
+               display="flex"
+               justifyContent="center"
+               alignItems="center"
+               height={50} // Set the desired height
+               margin="auto"
+               >
+               <Button variant="contained" color="primary">
+               SUBMIT
+               </Button>
+            </Box>
+
         </Box>
-                <Button variant="contained" onClick = {regStudent}>
-                    Submit
-                </Button>
             </Paper>
 
-            <Paper elevation={3} style={paperStyle}>
+            {/* <Paper elevation={3} style={paperStyle}>
                 <h1>Delete a Student</h1>
                 <Box
                     component="form"
@@ -105,11 +181,11 @@ export default function Student() {
                 <Button variant="outlined" id="studentId" color="error" onClick={(e) => delStudent(e)}>
                     Delete
                 </Button>
-            </Paper>
+            </Paper> */}
 
-            <h1>Students</h1>
+            {/* <h1>Students</h1> */}
 
-            <Paper elevation={3} style={paperStyle}>
+            {/* <Paper elevation={3} style={paperStyle}>
 
                 {students.map(student=>(
                     <Paper elevation={6} style={{margin:"10px",padding:"15px", textAlign:"left"}} key={student.id}>
@@ -122,7 +198,7 @@ export default function Student() {
                     </Paper>
                 ))
                 }
-            </Paper>
+            </Paper> */}
         </Container>
     );
 }
